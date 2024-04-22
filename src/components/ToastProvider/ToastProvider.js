@@ -11,14 +11,16 @@ const ToastProvider = ({ children }) => {
 
   const createToast = React.useCallback(
     (message, variant) => {
-      const updatedToasts = [...toasts];
       const id = crypto.randomUUID();
-      updatedToasts.push({
-        id,
-        message,
-        variant,
-        handleDismiss: () => removeToast(id),
-      });
+      const updatedToasts = [
+        ...toasts,
+        {
+          id,
+          message,
+          variant,
+          handleDismiss: () => removeToast(id),
+        },
+      ];
       setToats(updatedToasts);
     },
     [toasts]
