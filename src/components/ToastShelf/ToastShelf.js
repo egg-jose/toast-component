@@ -20,7 +20,12 @@ function ToastShelf() {
   }, [removeAllToast]);
   if (toasts.length === 0) return <></>;
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      role="region"
+      aria-live="polite"
+      aria-label="Notification"
+      className={styles.wrapper}
+    >
       {toasts.map((item) => (
         <li key={item.id} className={styles.toastWrapper}>
           <Toast variant={item.variant} handleDismiss={item.handleDismiss}>

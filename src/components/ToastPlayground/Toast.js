@@ -22,21 +22,26 @@ function Toast({ content, variant, handleClose }) {
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
-        <IconVariant icon={ICONS_BY_VARIANT[variant]}/>
+        <IconVariant icon={ICONS_BY_VARIANT[variant]} />
       </div>
-      <p className={styles.content}>{content}</p>
-      <button className={styles.closeButton} onClick={handleClose}>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} -</VisuallyHidden>
+        {content}
+      </p>
+      <button
+        aria-label="Dismiss message"
+        aria-live="off"
+        className={styles.closeButton}
+        onClick={handleClose}
+      >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
 }
 
-function IconVariant ({icon: Icon}) {
-  return (
-    <Icon size={24}/>
-  )
+function IconVariant({ icon: Icon }) {
+  return <Icon size={24} />;
 }
 
 export default Toast;
