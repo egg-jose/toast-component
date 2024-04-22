@@ -13,27 +13,15 @@ function ToastPlayground() {
   const [currentVariant, setCurrentVariant] = React.useState(
     VARIANT_OPTIONS[0]
   );
-  const { toasts, setToats } = React.useContext(ToastContext);
+  const { createToast } = React.useContext(ToastContext);
 
   const handleChangeMessage = (e) => {
     setMessage(e.target.value);
   };
 
-  const handleCloseToast = (id) => {
-    setToats((currentToats) => currentToats.filter((toast) => toast.id !== id));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedToasts = [...toasts];
-    const id = crypto.randomUUID();
-    updatedToasts.push({
-      id,
-      message: message,
-      variant: currentVariant,
-      handleDismiss: () => handleCloseToast(id),
-    });
-    setToats(updatedToasts);
+    createToast(message, currentVariant);
     setMessage("");
   };
 
@@ -43,7 +31,7 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      {toasts.length > 0 && <ToastShelf />}
+      <ToastShelf />
 
       <div className={styles.controlsWrapper}>
         <form onSubmit={handleSubmit}>

@@ -6,6 +6,7 @@ import { ToastContext } from "../ToastProvider/ToastProvider";
 
 function ToastShelf() {
   const { toasts } = React.useContext(ToastContext);
+  if (toasts.length === 0) return <></>;
   return (
     <ol className={styles.wrapper}>
       {toasts.map((item) => (
