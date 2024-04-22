@@ -9,6 +9,10 @@ const ToastProvider = ({ children }) => {
     setToats((currentToats) => currentToats.filter((toast) => toast.id !== id));
   };
 
+  const removeAllToast = React.useCallback(() => {
+    setToats([]);
+  }, []);
+
   const createToast = React.useCallback(
     (message, variant) => {
       const id = crypto.randomUUID();
@@ -30,8 +34,9 @@ const ToastProvider = ({ children }) => {
     () => ({
       toasts,
       createToast,
+      removeAllToast,
     }),
-    [toasts, createToast]
+    [toasts, createToast, removeAllToast]
   );
 
   return (
