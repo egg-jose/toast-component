@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
@@ -12,7 +13,7 @@ function ToastPlayground() {
   const [currentVariant, setCurrentVariant] = React.useState(
     VARIANT_OPTIONS[0]
   );
-  const [toasts, setToats] = useState([]);
+  const { toasts, setToats } = React.useContext(ToastContext);
 
   const handleChangeMessage = (e) => {
     setMessage(e.target.value);
@@ -42,7 +43,7 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      {toasts.length > 0 && <ToastShelf items={toasts} />}
+      {toasts.length > 0 && <ToastShelf />}
 
       <div className={styles.controlsWrapper}>
         <form onSubmit={handleSubmit}>
